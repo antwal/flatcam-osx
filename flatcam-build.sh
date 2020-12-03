@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+#set -e
 
 # Install FlatCAM depencencies Python3, PyQT5, gets and spatialindex
 brew install python pyqt geos spatialindex

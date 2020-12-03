@@ -43,8 +43,8 @@ script:
     - chmod a+x ./flatcam-build.sh
     - ./flatcam-build.sh
 
-after_script:
-    - set +e
+#after_script:
+#    - set +e
 
 #after_success:
 #  - .travis/after_success.sh
