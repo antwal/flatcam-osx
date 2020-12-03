@@ -32,11 +32,11 @@ deactivate
 
 # Copy a script to execute FlatCAM
 echo "Copy Execute Script"
-cp ../FlatCam ./FlatCAM_beta_8.993_sources/
+cp ../FlatCam ./
 
 # Copy the AppleScript
 echo "Copy Compile Script"
-cp ../FlatCAM.scpt ./FlatCAM_beta_8.993_sources/
+cp ../FlatCAM.scpt ./
 
 # Compile the AppleScript into an application
 echo "Build..."
