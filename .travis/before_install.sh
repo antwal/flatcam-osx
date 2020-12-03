@@ -11,7 +11,7 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
             cd "$(brew --repo)"
             git fetch
             git reset --hard origin/master
-            brew update
+            brew update --force
             cd ~/
             ;;
     esac
