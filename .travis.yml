@@ -1,0 +1,61 @@
+sudo: required
+
+language: python
+
+branches:
+  only:
+  - master
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+git:
+  submodules:
+    false
+
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode12.2
+      env: OS_NAME="osx" OS_VERSION="10.15.7" OS_BUILD="brew"
+      # Apple OSX 10.15.7 Catalina
+    - os: osx
+      osx_image: xcode11.3
+      env: OS_NAME="osx" OS_VERSION="10.14.6" OS_BUILD="brew"
+      # Apple OSX 10.14.6 Mojave
+    - os: osx
+      osx_image: xcode10.1
+      env: OS_NAME="osx" OS_VERSION="10.13" OS_BUILD="brew"
+      # Apple OSX 10.13 High Sierra
+    - os: osx
+      osx_image: xcode9
+      env: OS_NAME="osx" OS_VERSION="10.12" OS_BUILD="brew"
+      # Apple OSX 10.12 Sierra
+
+before_install:
+    - chmod a+x ./.travis/before_install.sh
+    - ./.travis/before_install.sh
+
+#install:
+#    -
+
+script:
+    - chmod a+x ./flatcam-build.sh
+    - ./flatcam-build.sh
+
+after_script:
+    - set +e
+
+#after_success:
+#  - .travis/after_success.sh
+
+stages:
+    - name: static analysis
+
+jobs:
+  fast_finish: true
+  include:
+    - stage: static analysis
+      python: "3.5"
