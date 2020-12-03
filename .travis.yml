@@ -40,8 +40,8 @@ before_install:
 #    -
 
 script:
-    - chmod a+x ./flatcam-build.sh
-    - ./flatcam-build.sh
+    - chmod a+x ./build.sh
+    - ./build.sh
 
 #after_script:
 #    - set +e
