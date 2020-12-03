@@ -48,16 +48,3 @@ after_script:
 
 #after_success:
 #  - .travis/after_success.sh
-
-#python:
-#   - "3.6"
-#   - "pypy3"
-
-#stages:
-#    - name: static analysis
-
-#jobs:
-#  fast_finish: true
-#  include:
-#    - stage: static analysis
-#      python: "3.5"

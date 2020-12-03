@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Make sure the Homebrew executable paths are in the PATH env variable
+export PATH='/usr/local/bin:/usr/local/sbin:'"$PATH"
+
+# Find the script's real path
+script_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+if real_script_path="$( readlink "$script_directory/$( basename "$0" )" )"
+then
+    real_script_directory="$( dirname "$real_script_path" )"
+else
+    # shellcheck disable=SC2034
+    real_script_directory="$script_directory"
+fi
+
+exit_code=0
+
+# Enable FlatCAM's virtual env
+source "$script_directory"'/env/bin/activate'
+# Execute FlatCAM, log the output to FlatCAM.log
+python3 "$script_directory"'/FlatCAM.py' &> "$script_directory"'/FlatCAM.log'
+# Capture the exit code
+exit_code="$?"
+# Disable the virtual env
+deactivate
+# Exit the script with the exit code returned by FlatCAM
+exit "$exit_code"
+
