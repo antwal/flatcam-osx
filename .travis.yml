@@ -1,6 +1,4 @@
-sudo: required
-
-language: minimal
+language: shell
 
 branches:
   only:
@@ -15,7 +13,7 @@ git:
   submodules:
     false
 
-matrix:
+jobs:
   include:
     - os: osx
       osx_image: xcode12.2
