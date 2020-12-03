@@ -9,9 +9,11 @@ brew install python pyqt geos spatialindex
 pip3 install virtualenv
 
 # Download Source Code
-git clone https://antwal@bitbucket.org/jpcgt/flatcam.git
-
-cd flatcam
+wget https://bitbucket.org/jpcgt/flatcam/downloads/FlatCAM_beta_8.993_sources.zip
+# Unarchive the files
+unzip FlatCAM_beta_8.993_sources.zip
+# Change to the FlatCAM directory
+cd FlatCAM_beta_8.993_sources
 
 # Create a Python virtual environment
 virtualenv env
@@ -22,14 +24,16 @@ pip3 install numpy matplotlib rtree scipy shapely simplejson lxml rasterio ezdxf
 # Get out of the virtual environment
 deactivate
 
+cd ..
+
 # Copy a script to execute FlatCAM
-cp ../FlatCam ./
+cp ./FlatCam ./FlatCAM_beta_8.993_sources/
 
 # Copy the AppleScript
-cp ../FlatCAM.scpt ./
+cp ./FlatCAM.scpt ./FlatCAM_beta_8.993_sources/
 
 # Compile the AppleScript into an application
-osacompile -o ../FlatCAM-${OS_NAME}-${OS_VERSION}.app FlatCAM.scpt
+osacompile -o ./FlatCAM-${OS_NAME}-${OS_VERSION}.app ./FlatCAM_beta_8.993_sources/FlatCAM.scpt
 
 
 
