@@ -19,16 +19,27 @@ cd FlatCAM_beta_8.993_sources
 virtualenv env
 # Activate the virtual environment
 source env/bin/activate
-# Upgrade PIP
-python -m pip install --upgrade pip
-# Install all Python dependencies in the virtual environment
-pip3 install numpy matplotlib rtree scipy shapely simplejson lxml rasterio ezdxf svg.path freetype-py fontTools ortools vispy PyOpenGL PyQT5
-# Test
-ls -al ./env/bin
+
+if [[ $OS_VERSION == '10.12' ]]; then
+  
+  brew -v
+
+else
+
+  # Upgrade PIP
+  python -m pip install --upgrade pip
+
+  # Install all Python dependencies in the virtual environment
+  pip3 install numpy matplotlib rtree scipy shapely simplejson lxml rasterio ezdxf svg.path freetype-py fontTools ortools vispy PyOpenGL PyQT5
+
+fi
+
+# Test Python Version
+python -V
+pip3 -V
+
 # Get out of the virtual environment
 deactivate
-
-# cd ..
 
 # Copy a script to execute FlatCAM
 echo "Copy Execute Script"
@@ -41,9 +52,3 @@ cp ../FlatCAM.scpt ./
 # Compile the AppleScript into an application
 echo "Build..."
 osacompile -o ../FlatCAM-${OS_NAME}-${OS_VERSION}.app ./FlatCAM.scpt
-
-# Test End
-echo "Test end"
-ls -al
-
-ls -al ../
