@@ -38,6 +38,7 @@ script:
 deploy:
   provider: releases
   cleanup: false
+  edge: true
   token:
     secure: $GITHUB_TOKEN
   file:
