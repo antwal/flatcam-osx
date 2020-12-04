@@ -48,3 +48,7 @@ deploy:
     branch: master
     tags: false
     condition: OS_DEPLOY="true"
+
+env:
+  global:
+    secure: $GH_TOKEN
