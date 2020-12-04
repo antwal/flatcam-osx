@@ -40,7 +40,7 @@ deploy:
   skip-cleanup: true
 #  github-token: $GH_TOKEN
   api_key:
-    secure: $GH_TOKEN
+    secure: $GITHUB_TOKEN
   file:
     - dist/*
 #  local_dir: dist
