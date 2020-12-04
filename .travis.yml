@@ -37,8 +37,8 @@ script:
 
 deploy:
   provider: releases
-  skip-cleanup: true
-  api_key:
+  cleanup: false
+  token:
     secure: $GITHUB_TOKEN
   file:
     - dist/*
