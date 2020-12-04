@@ -2,11 +2,32 @@
 
 #set -e
 
-# Install FlatCAM depencencies Python3, PyQT5, gets and spatialindex
-brew install python pyqt geos spatialindex
+if [[ $OS_VERSION == '10.12' ]]; then
 
-# Install Python 3's virtualenv. This is useful not to pollute our global libraries directory
-pip3 install virtualenv
+  # Install FlatCAM depencencies Python3, PyQT5, gets and spatialindex
+  brew install python3 pyqt geos spatialindex
+
+  which python
+  which python3
+
+  # Install Python 3's virtualenv. This is useful not to pollute our global libraries directory
+  pip3 install virtualenv
+
+else
+
+  # Install FlatCAM depencencies Python3, PyQT5, gets and spatialindex
+  brew install python pyqt geos spatialindex
+
+  # Upgrade PIP
+  python -m pip install --upgrade pip
+
+  # Install Python 3's virtualenv. This is useful not to pollute our global libraries directory
+  pip3 install virtualenv
+
+  # Install all Python dependencies in the virtual environment
+  pip3 install numpy matplotlib rtree scipy shapely simplejson lxml rasterio ezdxf svg.path freetype-py fontTools ortools vispy PyOpenGL PyQT5
+
+fi
 
 # Download Source Code
 wget https://bitbucket.org/jpcgt/flatcam/downloads/FlatCAM_beta_8.993_sources.zip
@@ -19,25 +40,10 @@ cd FlatCAM_beta_8.993_sources
 virtualenv env
 # Activate the virtual environment
 source env/bin/activate
-
-if [[ $OS_VERSION == '10.12' ]]; then
-  
-  brew -v
-
-else
-
-  # Upgrade PIP
-  python -m pip install --upgrade pip
-
-  # Install all Python dependencies in the virtual environment
-  pip3 install numpy matplotlib rtree scipy shapely simplejson lxml rasterio ezdxf svg.path freetype-py fontTools ortools vispy PyOpenGL PyQT5
-
-fi
-
 # Test Python Version
+ls -al ./evn/bin
 python -V
 pip3 -V
-
 # Get out of the virtual environment
 deactivate
 
@@ -51,4 +57,11 @@ cp ../FlatCAM.scpt ./
 
 # Compile the AppleScript into an application
 echo "Build..."
-osacompile -o ../FlatCAM-${OS_NAME}-${OS_VERSION}.app ./FlatCAM.scpt
+osacompile -o FlatCAM.app FlatCAM.scpt
+
+# End Build
+cd ..
+
+mv ./FlatCAM_beta_8.993_sources ./FlatCAM_beta_8.993-${OS_VERSION}
+
+# zip folder
