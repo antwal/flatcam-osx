@@ -4,11 +4,10 @@
 
 if [[ $OS_VERSION == '10.12' ]]; then
 
-  # Install FlatCAM depencencies Python3, PyQT5, gets and spatialindex
-  brew install python3 pyqt geos spatialindex
+  brew install python3
 
-  which python
-  which python3
+  # Install FlatCAM depencencies Python3, PyQT5, gets and spatialindex
+  brew install pyqt geos spatialindex
 
   # Install Python 3's virtualenv. This is useful not to pollute our global libraries directory
   pip3 install virtualenv
