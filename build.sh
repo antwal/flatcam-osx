@@ -39,10 +39,12 @@ cd FlatCAM_beta_8.993_sources
 virtualenv env
 # Activate the virtual environment
 source env/bin/activate
+
 # Test Python Version
-ls -al ./evn/bin
+ls -al ./env/bin
 python -V
 pip3 -V
+
 # Get out of the virtual environment
 deactivate
 
@@ -61,6 +63,10 @@ osacompile -o FlatCAM.app FlatCAM.scpt
 # End Build
 cd ..
 
-mv ./FlatCAM_beta_8.993_sources ./FlatCAM_beta_8.993-${OS_VERSION}
+mv ./FlatCAM_beta_8.993_sources ./FlatCAM_beta_8.993
 
-# zip folder
+mkdir dist
+
+zip -r -X ./dist/FlatCam-${OS_VERSION}.zip ./FlatCAM_beta_8.993/
+
+[[ -f "./dist/FlatCam-${OS_VERSION}.zip" ]] && OS_DEPLOY="true"

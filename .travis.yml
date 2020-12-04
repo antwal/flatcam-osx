@@ -10,41 +10,41 @@ notifications:
     on_failure: change
 
 git:
-  submodules:
-    false
+  submodules: false
 
 jobs:
   include:
-    - os: osx
-      osx_image: xcode12.2
-      env: OS_NAME="osx" OS_VERSION="10.15.7" OS_BUILD="brew" OS_DEPLOY="false"
-      # Apple OSX 10.15.7 Catalina
-    - os: osx
-      osx_image: xcode11.3
-      env: OS_NAME="osx" OS_VERSION="10.14.6" OS_BUILD="brew" OS_DEPLOY="false"
-      # Apple OSX 10.14.6 Mojave
-    - os: osx
-      osx_image: xcode10.1
-      env: OS_NAME="osx" OS_VERSION="10.13" OS_BUILD="brew" OS_DEPLOY="false"
-      # Apple OSX 10.13 High Sierra
-    - os: osx
-      osx_image: xcode9
-      env: OS_NAME="osx" OS_VERSION="10.12" OS_BUILD="brew" OS_DEPLOY="false"
-      # Apple OSX 10.12 Sierra
+  - os: osx
+    osx_image: xcode12.2
+    env: OS_NAME="osx" OS_VERSION="10.15.7" OS_BUILD="brew" OS_DEPLOY="false"
+  - os: osx
+    osx_image: xcode11.3
+    env: OS_NAME="osx" OS_VERSION="10.14.6" OS_BUILD="brew" OS_DEPLOY="false"
+  - os: osx
+    osx_image: xcode10.1
+    env: OS_NAME="osx" OS_VERSION="10.13" OS_BUILD="brew" OS_DEPLOY="false"
+  - os: osx
+    osx_image: xcode9
+    env: OS_NAME="osx" OS_VERSION="10.12" OS_BUILD="brew" OS_DEPLOY="false"
 
 before_install:
-    - chmod a+x ./.travis/before_install.sh
-    - ./.travis/before_install.sh
-
-#install:
-#    -
+  - chmod a+x ./.travis/before_install.sh
+  - "./.travis/before_install.sh"
 
 script:
-    - chmod a+x ./build.sh
-    - ./build.sh
+  - chmod a+x ./build.sh
+  - "./build.sh"
 
-#after_script:
-#    - set +e
-
-#after_success:
-#  - .travis/after_success.sh
+deploy:
+  provider: releases
+  skip-cleanup: true
+  github-token: $GH_TOKEN
+#  api_key:
+#    secure: ""
+#  file:
+#    - ""
+  local_dir: dist
+  on:
+    branch: master
+    tags: false
+    condition: OS_DEPLOY="true"
