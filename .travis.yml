@@ -38,17 +38,11 @@ script:
 deploy:
   provider: releases
   skip-cleanup: true
-#  github-token: $GH_TOKEN
   api_key:
     secure: $GITHUB_TOKEN
   file:
-    - dist/*
-#  local_dir: dist
+  - dist/*
   on:
     branch: master
     tags: false
     condition: OS_DEPLOY="true"
-
-env:
-  global:
-    secure: $GH_TOKEN
